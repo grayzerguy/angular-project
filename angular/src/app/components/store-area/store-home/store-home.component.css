@@ -1,0 +1,16 @@
+app-product-list
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-left:260px;
+    margin-right:260px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    
+
+
+
+
+}

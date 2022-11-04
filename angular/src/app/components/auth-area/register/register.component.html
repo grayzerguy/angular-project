@@ -1,0 +1,48 @@
+<div class="container">
+  <h2 class="text-center">Register in to system</h2>
+  <!-- </form>(ngSubmit)="register()"> -->
+  <form class="col-md-6 mx-auto"  (ngSubmit)="register()">
+    <div class="text-center mb-3">
+      <label for="firstName" class="form-label">firstName</label>
+      <input type="text" class="form-control" id="firstName" aria-describedby="firstName" name="firstName"
+        [(ngModel)]="user.firstName">
+    </div>
+    <div class="text-center mb-3">
+      <label for="lastName" class="form-label">lastName</label>
+      <input type="text" class="form-control" id="lastName" aria-describedby="lastName" name="lastName"
+        [(ngModel)]="user.lastName">
+    </div>
+    <div class="text-center mb-3">
+      <label for="InputEmail" class="form-label">Email address</label>
+      <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" name="email"
+        [(ngModel)]="user.email">
+      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+    <div class="text-center mb-3">
+      <label for="InputPassword" class="form-label">Password</label>
+      <input type="password" class="form-control" id="InputPassword" name="password" [(ngModel)]="user.password">
+    </div>
+    <div class="text-center mb-3">
+      <label for="city" class="form-label">city</label>
+      <input type="text" class="form-control" id="city" aria-describedby="city" name="city" [(ngModel)]="user.city">
+    </div>
+    <div class="text-center mb-3">
+      <label for="street" class="form-label">street</label>
+      <input type="text" class="form-control" id="street" aria-describedby="street" name="street"
+        [(ngModel)]="user.street">
+    </div>
+    <div class="text-center mb-3">
+      <label for="phone" class="form-label">phone</label>
+      <input type="text" class="form-control" id="phone" aria-describedby="phone" name="phone" [(ngModel)]="user.phone">
+    </div>
+    <!-- <div class="text-center mb-3">
+      <label for="isAdmin" class="form-label">isAdmin</label>
+      <input  type="text" class="form-control" id="isAdmin" aria-describedby="isAdmin"  name="isAdmin"  [(ngModel)] = "user.isAdmin"
+      >
+    </div> -->
+    <div class="mt-3">
+      <!-- <button class="btn btn-info me-2">Log in</button> -->
+      <button class="btn btn-success">Sign up</button>
+    </div>
+  </form>
+</div>

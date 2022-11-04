@@ -1,0 +1,29 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Shipping Address</th>
+      <th>Date</th>
+      <th>City</th>
+      <th>last Four Digits</th>
+      <th>Total Price</th>
+      <th>Edit</th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let o of orders">
+      <td>{{o.user.firstName}} {{o.user.lastName}}</td>
+
+      <td>{{o.shippingAddress}}</td>
+      <td>{{o.dateOrdered| date}}</td>
+      <td>{{o.city}}</td>
+      <td>{{o.lastFourDigits}}</td>
+      <td>{{o.totalPrice | currency:"USD"}}</td>
+      <a [routerLink]="['/admin/orders/', o._id]">Edit</a>
+      <td>
+      </td>
+    </tr>
+  </tbody>
+</table>
