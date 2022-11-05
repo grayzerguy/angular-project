@@ -5,7 +5,7 @@ import ErrorModel from "../03-models/error-model";
 
 // SELECT * FROM Category
 async function getAllCategories(): Promise<ICategoryModel[]> {
-    // Get all category without virtual fields: 
+    
     return CategoryModel.find().exec();
 
 }

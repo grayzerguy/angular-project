@@ -1,6 +1,7 @@
 <div>
   <p>
     <a routerLink="/admin/products/new" class="btn btn-primary">New Product</a>
+    <a routerLink="/admin/category/new" class="btn btn-primary">New Category</a>
 
  
   </p>
@@ -9,7 +10,7 @@
   </p>
 </div>
 
-<table class="table">
+<table class="table" *ngIf="products">
   <thead>
     <tr>
       <th>Name</th>

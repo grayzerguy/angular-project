@@ -36,8 +36,20 @@ export class ProductCardComponent {
     this.cartService.setCartItem(cartItem)
     this.notifyService.success("Product added to cart")
     
-   
+      }
+  public removeProductFromCart() {
+    const cartItem : CartItemModel = {
+      productId: this.product._id,
+      quantity: -1
+      
   }
+ 
+  this.cartService.setCartItem(cartItem)
+    this.notifyService.success("Product removed from cart")
+
+  }
+
+
   getCart() {
     return JSON.parse( localStorage.getItem(CART_KEY))
   }

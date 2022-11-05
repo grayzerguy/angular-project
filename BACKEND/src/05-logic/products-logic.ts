@@ -82,7 +82,7 @@ export default {
     updateProduct,
     deleteProduct,
     countProducts,
-    // getFeaturedProducts,
+    getFeaturedProducts,
     getAllProductsByCategory,
     getProductsByCategory
 

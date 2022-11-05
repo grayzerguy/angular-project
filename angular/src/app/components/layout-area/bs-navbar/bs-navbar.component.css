@@ -7,3 +7,9 @@ nav{
   background-color: #f8f9fa;
   margin-top: 0;
 }
+.card{
+  padding: 0;
+}
+.cart-footer button{
+ cursor: pointer;
+} 

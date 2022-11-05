@@ -22,6 +22,7 @@ import { AdminOrdersComponent } from './components/admin-area/admin-orders/admin
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductFormComponent } from './components/admin-area/product-form/product-form.component';
 import { OrdersModule } from './modules/order.modules';
+import { AdminCategoryComponent } from './components/admin-area/admin-category/admin-category.component';
 
 
 @NgModule({
@@ -42,6 +43,8 @@ import { OrdersModule } from './modules/order.modules';
     AdminProductsComponent,
     AdminOrdersComponent,
     ProductFormComponent,
+    AdminCategoryComponent,
+    AdminCategoryComponent,
      ],
   imports: [
     BrowserModule,

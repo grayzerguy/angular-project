@@ -47,6 +47,4 @@ export class BsNavbarComponent implements OnInit, OnDestroy {
    return  store.getState().CartState.carts[0].items.map(({quantity}) => quantity).reduce((total, quantity) => total + quantity,0)
   }
  
-  
-
 }

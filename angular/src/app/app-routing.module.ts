@@ -1,3 +1,4 @@
+import { AdminCategoryComponent } from './components/admin-area/admin-category/admin-category.component';
 import { ProductFormComponent } from './components/admin-area/product-form/product-form.component';
 import { AdminGuard } from './services/admin.guard';
 import { RegisterComponent } from './components/auth-area/register/register.component';
@@ -31,6 +32,7 @@ const routes: Routes = [
 
 
   { path: "admin/products/new", component: ProductFormComponent, canActivate: [AuthGuard, AdminGuard] },
+  { path: "admin/category/new", component: AdminCategoryComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: "admin/products/:id", component: ProductFormComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: "admin/products", component: AdminProductsComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: "admin/orders", component: AdminOrdersComponent, canActivate: [AuthGuard, AdminGuard] },

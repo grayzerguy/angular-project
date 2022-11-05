@@ -45,6 +45,12 @@ export function cartsReducer(currentState = new CartState(), action: CartAction)
       newState.carts[indexToUpdate] = action.payload;
       break;
 
+    case CartsActionType.CartDeleted:
+      const indexToDelete = newState.carts.findIndex(c => c.items === action.payload);
+      newState.carts.splice(indexToDelete, 1);
+      break;
+      
+
 
  
   }

@@ -10,7 +10,7 @@ import logic from "../05-logic/orders-logic";
 const router = express.Router();
 
 //get all orders
-router.get("/", async (request: Request, response: Response, next: NextFunction) => {
+router.get("/",verifyLoggedIn, async (request: Request, response: Response, next: NextFunction) => {
     try {
 
         const OrderList = await logic.getAllOrders();
@@ -21,7 +21,7 @@ router.get("/", async (request: Request, response: Response, next: NextFunction)
     }
 });
 //get one order
-router.get("/:id", async (request: Request, response: Response, next: NextFunction) => {
+router.get("/:id",verifyLoggedIn, async (request: Request, response: Response, next: NextFunction) => {
     try {
         const id = request.params.id;
         const order = await logic.getOneOrder(id);
@@ -34,7 +34,7 @@ router.get("/:id", async (request: Request, response: Response, next: NextFuncti
 );
 
 //add order
-router.post('/', async (request: Request, response: Response, next: NextFunction) => {
+router.post('/',verifyLoggedIn, async (request: Request, response: Response, next: NextFunction) => {
     try {
         const orderItemsIds = Promise.all(request.body.orderItems.map(async (orderItem) => {
             let newOrderItem = new OrderItemModel
@@ -81,7 +81,7 @@ router.post('/', async (request: Request, response: Response, next: NextFunction
 }
 );
 //update order
-router.put('/:id', async (request: Request, response: Response, next: NextFunction) => {
+router.put('/:id',verifyLoggedIn, async (request: Request, response: Response, next: NextFunction) => {
     try {
         const order = await OrderModel.findByIdAndUpdate(
             request.params.id,
@@ -100,7 +100,7 @@ router.put('/:id', async (request: Request, response: Response, next: NextFuncti
 }
 );
 //delete order
-router.delete("/:_id", async (request: Request, response: Response, next: NextFunction) => {
+router.delete("/:_id",verifyLoggedIn, async (request: Request, response: Response, next: NextFunction) => {
     try {
         const _id = request.params._id;
         await logic.deleteOrder(_id);

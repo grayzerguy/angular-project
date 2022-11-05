@@ -9,7 +9,7 @@ import logic from "../05-logic/categories-logic";
 const router = express.Router();
 
 
-router.get("/", async (request: Request, response: Response, next: NextFunction) => {
+router.get("/" ,verifyLoggedIn, async (request: Request, response: Response, next: NextFunction) => {
     try {
         
         const categoryList = await logic.getAllCategories();
@@ -21,7 +21,7 @@ router.get("/", async (request: Request, response: Response, next: NextFunction)
     }
 });
 
-router.get("/:_id", async (request: Request, response: Response, next: NextFunction) => {
+router.get("/:_id",verifyLoggedIn, async (request: Request, response: Response, next: NextFunction) => {
     try {
         const _id = request.params._id;
         const category = await logic.getOneCategory(_id);

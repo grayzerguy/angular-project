@@ -1,6 +1,9 @@
 export class CategoryModel {
-  public _id?:  string;
-  public name?: string;
+  // getAllCategories(): CategoryModel[] | PromiseLike<CategoryModel[]> {
+  //   throw new Error('Method not implemented.');
+  // }
+  public _id:  string;
+  public name: string;
 
 
 }

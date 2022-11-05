@@ -13,7 +13,7 @@ import verifyLoggedIn from '../02-middleware/verify-logged-in';
 const router = express.Router();
 
 //get all products
-router.get("/", async (request: Request, response: Response, next: NextFunction) => {
+router.get("/",verifyLoggedIn, async (request: Request, response: Response, next: NextFunction) => {
 
     let filter = {}
 
@@ -39,7 +39,7 @@ router.get("/", async (request: Request, response: Response, next: NextFunction)
     }
 });
 //getProductsByCategory 
-router.get("/category/:_id", async (request: Request, response: Response, next: NextFunction) => {
+router.get("/category/:_id" ,verifyLoggedIn, async (request: Request, response: Response, next: NextFunction) => {
     try {
         const categoryId = request.params._id;
         const products = await logic.getProductsByCategory(categoryId);
@@ -51,7 +51,7 @@ router.get("/category/:_id", async (request: Request, response: Response, next: 
 });
 
 //get one product
-router.get("/:_id", async (request: Request, response: Response, next: NextFunction) => {
+router.get("/:_id",verifyAdmin, async (request: Request, response: Response, next: NextFunction) => {
     try {
         const _id = request.params._id;
 
@@ -93,7 +93,7 @@ router.post("/", uploadOptions.single('image'), async (request: Request, respons
 );
 
 //updatedProduct
-router.put("/:_id", uploadOptions.single('image'), async (request: Request, response: Response, next: NextFunction) => {
+router.put("/:_id",verifyAdmin, uploadOptions.single('image'), async (request: Request, response: Response, next: NextFunction) => {
     //updatedProduct with image
     try {
         const file = request.file;
@@ -142,7 +142,7 @@ router.put("/:_id", uploadOptions.single('image'), async (request: Request, resp
 
 
 
-router.delete("/:_id", async (request: Request, response: Response, next: NextFunction) => {
+router.delete("/:_id", verifyAdmin, async (request: Request, response: Response, next: NextFunction) => {
     try {
         const _id = request.params._id;
         //get the product
@@ -162,12 +162,8 @@ router.delete("/:_id", async (request: Request, response: Response, next: NextFu
 }
 );
 
-
-
-
-
 //count all products in / ספירה של כל המוצרים בדוקומנט
-router.get("/get/count", async (request: Request, response: Response, next: NextFunction) => {
+router.get("/get/count",verifyAdmin, async (request: Request, response: Response, next: NextFunction) => {
     try {
         const products = await logic.countProducts();
         response.json(products);
@@ -177,43 +173,16 @@ router.get("/get/count", async (request: Request, response: Response, next: Next
     }
 });
 // get all products that are featured מועדפים
-// router.get("/get/featured/:count", async (request: Request, response: Response, next: NextFunction) => {
-//     try {
-//         let count = request.params.count
-//         const products = await logic.getFeaturedProducts(count);
-//         response.json(products);
-//     }
-//     catch (err: any) {
-//         next(err);
-//     }
-// });
-//update image
-// router.put("/image/:_id", uploadOptions.single('image'), async (request: Request, response: Response, next: NextFunction) => {
-//     try {
-//         const _id = request.params._id;
-//         const productToDeleteFromCloud = await logic.getOneProduct(_id);
-//         cloudinary.uploader.destroy(productToDeleteFromCloud.cloudinary_id);
-//         const fileName = request.file.filename;
-//         const imageUrl = request.file.path;
-//         const product = new ProductModel({
-//             _id: request.params._id,
-//             name: request.body.name=productToDeleteFromCloud.name,
-//             price: request.body.price=productToDeleteFromCloud.price,
-//             image: `${imageUrl}`,
-//             categoryId: request.body.categoryId,
-//             cloudinary_id: `${fileName}`,
-//         });
-//         const updatedProduct = await logic.updateProduct(product);
-//         response.json(updatedProduct);
-//     }
-//     catch (err: any) {
-//         next(err);
-//     }
-// }
-// );
-
-
-
+router.get("/get/featured/:count",verifyAdmin, async (request: Request, response: Response, next: NextFunction) => {
+    try {
+        let count = request.params.count
+        const products = await logic.getFeaturedProducts(count);
+        response.json(products);
+    }
+    catch (err: any) {
+        next(err);
+    }
+});
 
 
 export default router;

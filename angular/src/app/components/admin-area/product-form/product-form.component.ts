@@ -23,7 +23,6 @@ export class ProductFormComponent {
   public imageDisplay: string | ArrayBuffer;
   @ViewChild("imageBox")
   public imageBoxWrapper: ElementRef<HTMLInputElement>;
-
   constructor(private productsService: ProductsService,
     private categoriesService: CategoriesService,
     private router: Router,
@@ -67,7 +66,6 @@ export class ProductFormComponent {
       this.product.image = this.imageBoxWrapper.nativeElement.files[0];
       try{
       if (this.id) {
-        
         await this.productsService.updateProduct(this.product);
         this.notifyService.success("Product updated successfully");
 
@@ -75,7 +73,7 @@ export class ProductFormComponent {
       else {
         await this.productsService.addProduct(this.product);
         // c
-        this.notifyService.success("product added successfully")
+        this.notifyService.success("product added successfully");
         await (await this.categoriesService.getAllCategories()).toString();
         // return addedProduct
 
@@ -106,41 +104,3 @@ export class ProductFormComponent {
 
 }
 
-
-
-
-//
-//
-//
-
-//
-//
-//       this.notifyService.success("product added successfully")
-
-//       const categories = await (await this.categoriesService.getAllCategories( )).toString();
-//       console.log(this.categories)
-
-
-
-//       // console.log(this.product);
-
-//       //redirect to products list
-//       // window.location.href = "/store"--->bad practice
-//       this.router.navigateByUrl("/store")
-
-//     }
-//     catch (err: any) {
-//       this.notifyService.error(err)
-
-//     }
-
-//   }
-// }
-
-
-
-
-//   ngOnInit(): void {
-//   }
-
-// }

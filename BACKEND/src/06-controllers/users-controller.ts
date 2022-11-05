@@ -15,7 +15,7 @@ const router = express.Router();
 
 //get all users
 
-router.get("/", async (request: Request, response: Response, next: NextFunction) => {
+router.get("/",verifyAdmin, async (request: Request, response: Response, next: NextFunction) => {
     try {
 
         const userList = await logic.getAllUsers();
@@ -27,7 +27,7 @@ router.get("/", async (request: Request, response: Response, next: NextFunction)
 });
 
 //get one user
-router.get("/:_id", async (request: Request, response: Response, next: NextFunction) => {
+router.get("/:_id",verifyAdmin, async (request: Request, response: Response, next: NextFunction) => {
     try {
         const _id = request.params._id;
         const user = await logic.getOneUser(_id);

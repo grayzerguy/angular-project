@@ -30,6 +30,7 @@ export class CategoriesService {
   }
   public async addCategory(category: CategoryModel): Promise<CategoryModel> {
     const formDate = new FormData();
+   
     formDate.append("name", category.name);
     const addedCategory = await firstValueFrom(this.http.post<CategoryModel>(environment.categoriesUrl, formDate));
     //update in redux
