@@ -53,7 +53,7 @@ export class AdminUpdateProductComponent implements OnInit {
       this.categoryInput = new FormControl(this.product.categoryId._id);
       this.categoryInputName = new FormControl(this.product.categoryId.name);
 
-      console.log(this.product.categoryId)
+      // console.log(this.product.categoryId)
       this.productForm = new FormGroup({
         nameInput: this.nameInput,
         priceInput: this.priceInput,
@@ -78,21 +78,13 @@ export class AdminUpdateProductComponent implements OnInit {
       this.product.categoryId = this.categoryInput["value"];
       this.product.image = this.imageBoxWrapper.nativeElement.files[0];
       // this.product = this.productForm.value;
-      console.log(this.product.categoryId)
+      // console.log(this.product.categoryId)
       await this.productsService.updateProduct(this.product);
-
 
       this.notifyService.success("product updated successfully")
 
       this.router.navigateByUrl("/store")
-      //update redux
-
-
-
-
-
-
-
+      
     }
     catch (err: any) {
       this.notifyService.error(err)

@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { CartModel } from 'src/app/models/cart.model';
+import { CartItemModel, CartModel } from 'src/app/models/cart.model';
 import { ProductModel } from 'src/app/models/products-model';
 import { CartService } from 'src/app/services/cart.service';
+import { NotifyService } from 'src/app/services/notify.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -20,14 +21,21 @@ export class ProductCardComponent {
   public cart: CartModel
 
 
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService ,private notifyService: NotifyService) { }
 
-  public addToCart(productId: ProductModel, quantity: number) {
-    const cartItem = new CartModel();
-    // cartItem.productId = productId._id;
-    //     cartItem.quantity = quantity;
-        this.cartService.addToCart(cartItem);
+  ngOnInit(): void {}
+
+  public addProductToCart() {
+ 
+    const cartItem : CartItemModel = {
+      productId: this.product._id,
+      quantity: 1
+    }
+    this.cartService.setCartItem(cartItem)
+    this.notifyService.success("Product added to cart")
+   
   }
 }
+
 
 

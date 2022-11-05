@@ -10,21 +10,9 @@ import { addProductAction, deleteProductAction, fetchProductsAction, updateProdu
   providedIn: 'root'
 })
 export class ProductsService {
-
-
-
   constructor(private http: HttpClient) { }
-
-
-
-  public async getAllProducts(): Promise<ProductModel[]> {
-    // let params = new HttpParams();
-    // if (selectedCategory) {
-    //   params = params.append("category", selectedCategory);
-    //   console.log(params);
-    // }
-    let products = store.getState().productsState.products;
-
+   public async getAllProducts(): Promise<ProductModel[]> {
+   let products = store.getState().productsState.products;
     //check if the products are in the redux store
     if (products.length === 0) {
       products = await firstValueFrom(this.http.get<ProductModel[]>(environment.productsUrl));
@@ -51,8 +39,7 @@ export class ProductsService {
     formData.append("name", product.name);
     formData.append("price", product.price.toString());
     formData.append("categoryId", product.categoryId.toString());
-    // formData.append("imageUrl", product.imageUrl);
-    formData.append("image", product.image);
+   formData.append("image", product.image);
 
     const addedProduct = await firstValueFrom(this.http.post<ProductModel>(environment.productsUrl, formData));
     //update in redux
@@ -69,9 +56,7 @@ export class ProductsService {
     formData.append("categoryId", product.categoryId.toString());
     formData.append("image", product.image);
     const updatedProduct = await firstValueFrom(this.http.put<ProductModel>(environment.productsUrl + product._id, formData));
-
     store.dispatch(updateProductAction(updatedProduct));
-
     return updatedProduct
   }
   //delete product

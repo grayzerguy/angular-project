@@ -17,10 +17,7 @@ export class ProductListComponent implements OnInit {
   public products: ProductModel[] = [];
   public categories: CategoryModel[] = [];
   public category: string;
-  public highlight : string = "yellow";
-
-
-
+  
 
   constructor(private productsService: ProductsService, private categoriesService: CategoriesService,
     private notifyService: NotifyService, private route: ActivatedRoute

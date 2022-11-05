@@ -65,11 +65,11 @@ export class OrdersService {
     return updatedOrder
   }
 
-  // public async getOrdersByUserId(userId: string): Promise<OrderModel[]> {
-  //   let orders = await this.getAllOrders();
-  //   orders = orders.filter(o => o.user.id === userId);
-  //   return orders
-  // }
+  public async getOrdersByUserId(userId: string): Promise<OrderModel[]> {
+    let orders = await this.getAllOrders();
+    orders = orders.filter(o => o.user.id === userId);
+    return orders
+  }
 
 
 
