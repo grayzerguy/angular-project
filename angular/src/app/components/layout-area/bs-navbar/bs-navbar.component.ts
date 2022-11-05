@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Unsubscribe } from 'redux';
+import { CartModel } from 'src/app/models/cart.model';
 import { UserModel } from 'src/app/models/user.model';
 import store from 'src/app/redux/store';
 
@@ -12,6 +13,9 @@ import store from 'src/app/redux/store';
 export class BsNavbarComponent implements OnInit, OnDestroy {
 
   public user: UserModel;
+  public cart : CartModel[] ;
+  
+  public cartItemModel : CartModel;
   private unsubscribe: Unsubscribe;
   // public hidden: boolean = true;
 
@@ -23,7 +27,8 @@ export class BsNavbarComponent implements OnInit, OnDestroy {
     this.unsubscribe = store.subscribe(() => {
       this.user = store.getState().authState.user;
     })
-
+    this.cart = store.getState().CartState.carts
+       //get cart from redux
   }
   ngOnDestroy(): void {
     this.unsubscribe();
@@ -36,6 +41,10 @@ export class BsNavbarComponent implements OnInit, OnDestroy {
   public signUpButton() {
     this.router.navigateByUrl("/register");
     // this.hidden = false;
+  }
+
+  public getTotalQuantity() {
+   return  store.getState().CartState.carts[0].items.map(({quantity}) => quantity).reduce((total, quantity) => total + quantity,0)
   }
  
   

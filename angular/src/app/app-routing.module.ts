@@ -8,7 +8,7 @@ import { Page404Component } from './components/layout-area/page404/page404.compo
 import { StoreHomeComponent } from './components/store-area/store-home/store-home.component';
 
 
-import { ProductDetailsComponent } from './components/products-area/product-details/product-details.component';
+// import { ProductDetailsComponent } from './components/products-area/product-details/product-details.component';
 
 
 import { LogoutComponent } from './components/auth-area/logout/logout.component';
@@ -42,19 +42,8 @@ const routes: Routes = [
   { path: "my/orders", component: MyOrdersComponent, canActivate: [AuthGuard] },
 // the main page
   { path: "store", component: StoreHomeComponent,canActivate: [AuthGuard]},
-
-
-  //to delete
-
-
- 
-  { path: "products/details/:id", component: ProductDetailsComponent, canActivate: [AuthGuard, AdminGuard] },
-
-
-
   { path: "**", component: Page404Component },
-  // { path: "", component: StoreHomeComponent },
-  // {path: "products", component: ProductListComponent}
+
 ];
 
 @NgModule({

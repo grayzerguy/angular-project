@@ -65,7 +65,9 @@ export class ProductFormComponent {
   async add() {
     try {
       this.product.image = this.imageBoxWrapper.nativeElement.files[0];
+      try{
       if (this.id) {
+        
         await this.productsService.updateProduct(this.product);
         this.notifyService.success("Product updated successfully");
 
@@ -80,6 +82,10 @@ export class ProductFormComponent {
       }
       this.router.navigateByUrl("/admin/products");
     }
+    catch (err: any) {
+      this.notifyService.error(err)
+    }
+  }
     catch (err: any) {
       this.notifyService.error(err)
     }

@@ -49,6 +49,7 @@ export class ProductsService {
   }
   public async updateProduct(product: ProductModel): Promise<ProductModel> {
     //convert product to form data and send it to the server
+    try{
     const formData = new FormData();
     formData.append("id", product._id);
     formData.append("name", product.name);
@@ -57,8 +58,13 @@ export class ProductsService {
     formData.append("image", product.image);
     const updatedProduct = await firstValueFrom(this.http.put<ProductModel>(environment.productsUrl + product._id, formData));
     store.dispatch(updateProductAction(updatedProduct));
-    return updatedProduct
+    }
+    catch(err:any){
+      alert(err.message)
+    }
+    return product
   }
+
   //delete product
   public async deleteProduct(id: string): Promise<void> {
     await firstValueFrom(this.http.delete<void>(environment.productsUrl + id))

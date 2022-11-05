@@ -5,6 +5,7 @@ import { ProductModel } from 'src/app/models/products-model';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { NotifyService } from 'src/app/services/notify.service';
 import { ProductsService } from 'src/app/services/products.service';
+import { CartService } from 'src/app/services/cart.service';
 
 
 @Component({
@@ -20,13 +21,13 @@ export class ProductListComponent implements OnInit {
   
 
   constructor(private productsService: ProductsService, private categoriesService: CategoriesService,
-    private notifyService: NotifyService, private route: ActivatedRoute
+    private notifyService: NotifyService, private route: ActivatedRoute ,private cartService : CartService
   ) { }
 
   async ngOnInit() {
     try {
       this.categories = await this.categoriesService.getAllCategories();
-      this.products = await this.productsService.getAllProducts();
+      this.products = await this.productsService.getAllProducts();     
     }
     catch (err: any) {
       this.notifyService.error(err)

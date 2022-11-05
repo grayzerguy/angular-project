@@ -1,5 +1,5 @@
 export class CartModel {
-items?: CartItemModel[] = [];
+  items: CartItemModel[] = [];
 }
 
 export class CartItemModel {

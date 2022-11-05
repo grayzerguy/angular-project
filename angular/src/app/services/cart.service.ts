@@ -19,21 +19,27 @@ export class CartService {
   constructor(private http: HttpClient) { }
 
   public initCartLocalStorage() {
-    const intialCart = {
-      items: [] = []
+    const cart : CartModel = this.getCart();
+    if (!cart) {    
+      
+      localStorage.setItem(CART_KEY, JSON.stringify( {
+        items: [] = []
+      }));   
     }
-    const intialCartJason = JSON.stringify(intialCart);
-    localStorage.setItem(CART_KEY, intialCartJason);
-  }
-   getCart() : CartModel {
+   }
+
+
+  public getCart() : CartModel {
     const cartJsonString : string = localStorage.getItem(CART_KEY);
     const cart : CartModel = JSON.parse(cartJsonString);
+    store.dispatch(cartAddedAction(cart));
     return cart;
 
 
    }
-   setCartItem(cartItem:CartItemModel) : CartModel {
+   public setCartItem(cartItem:CartItemModel) : CartModel {
     const cart = this.getCart();
+    debugger
     const cartItemExists = cart.items.find(item => item.productId === cartItem.productId);
     if (cartItemExists) {
       cart.items.map(item => {
@@ -42,16 +48,24 @@ export class CartService {
           
         }
         return item;
+       
+
       })
     } else {
       cart.items.push(cartItem);
-     
+      
     }
 
    const cartJason = JSON.stringify(cart);
-     localStorage.setItem(CART_KEY, cartJason);  
+   localStorage.setItem(CART_KEY, cartJason);  
+   store.dispatch(cartAddedAction(cart));
    return cart;
+   
+ 
+
   }
+ 
+ 
 }
   
 
@@ -78,29 +92,6 @@ export class CartService {
 
 
 
-
-
-  // public addToCart(cartItem: CartModel) {
-  //   ///chach if the product is already in the cart (local storage)
-    // const cartInLocalStorage = localStorage.getItem("cart");
-    // if (cartInLocalStorage) {
-    //   this.cart = JSON.parse(cartInLocalStorage);
-    // }
-    //  cartItem to array
-    // const cartItemToAdd = new CartModel();
-    // cartItemToAdd.productId = cartItem.productId;
-    // cartItemToAdd.quantity = cartItem.quantity;
-    // this.cart.push(cartItemToAdd);
-    // console.log(this.cart);
-    //update local storage
-    // localStorage.setItem("orderItems", JSON.stringify(this.cart));
-    // store.dispatch(cartAddedAction(cartItemToAdd));  //  <---  to update the cart in the redux store  הפעל מאוחר יותר ולא לשכוח למחוק ביצירת הזמנה
-
-
-
-  //delete from cart
-
-// }
 
 
 

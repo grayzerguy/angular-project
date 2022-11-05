@@ -4,6 +4,7 @@ import { ProductModel } from 'src/app/models/products-model';
 import { CartService } from 'src/app/services/cart.service';
 import { NotifyService } from 'src/app/services/notify.service';
 import { environment } from 'src/environments/environment';
+import { CART_KEY } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-product-card',
@@ -19,6 +20,7 @@ export class ProductCardComponent {
   public showActions = true
   @Input()
   public cart: CartModel
+  @Input('shopping-cart') shoppingCart: CartModel;
 
 
   constructor(private cartService: CartService ,private notifyService: NotifyService) { }
@@ -33,7 +35,20 @@ export class ProductCardComponent {
     }
     this.cartService.setCartItem(cartItem)
     this.notifyService.success("Product added to cart")
+    
    
+  }
+  getCart() {
+    return JSON.parse( localStorage.getItem(CART_KEY))
+  }
+
+  getQuantity() {
+    
+    const cart = this.getCart()
+    if (!cart) return 0;
+
+  const item = cart.items.find((item: any) => item.productId === this.product._id)
+  return item ? item.quantity : 0;
   }
 }
 
