@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 import { CategoryModel } from 'src/app/models/category.model';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { NotifyService } from 'src/app/services/notify.service';
@@ -12,19 +13,23 @@ export class AdminCategoryComponent {
 
   public category = new CategoryModel();
 
-  constructor(private categoriesService : CategoriesService ,private notifyService: NotifyService ) { }
+  constructor(private categoriesService : CategoriesService ,private notifyService: NotifyService ,private router: Router) { }
 
   async add() {
     try {
   
       await this.categoriesService.addCategory(this.category);
-      return this.notifyService.success("Category added successfully");
-
+      this.notifyService.success("Category added successfully");
+      //go back to the categories list
+      
       }
+      
   
     catch (err: any) {
       this.notifyService.error(err)
     }
+    this.router.navigateByUrl("/admin/products");
+
   }
 }
   

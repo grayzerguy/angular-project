@@ -28,15 +28,11 @@ export class CategoriesService {
     const category = categories.find(c => c._id === _id);
     return category;
   }
-  public async addCategory(category: CategoryModel): Promise<CategoryModel> {
-    const formDate = new FormData();
-   
-    formDate.append("name", category.name);
-    const addedCategory = await firstValueFrom(this.http.post<CategoryModel>(environment.categoriesUrl, formDate));
+  public async addCategory(category: CategoryModel): Promise<void> {
+    await firstValueFrom(this.http.post(environment.categoriesUrl, category));
     //update in redux
-    store.dispatch(addCategoryAction(addedCategory));
-    return addedCategory
-  }
+    store.dispatch(addCategoryAction(category));
+        }
   public async updateCategory(category: CategoryModel): Promise<CategoryModel> {
     const formDate = new FormData();
     formDate.append("name", category.name);
