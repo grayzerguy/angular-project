@@ -3,60 +3,136 @@
     <form (ngSubmit)="add()" #formInfo="ngForm">
       <div class="form-group">
         <label for="name">name</label>
-        <input class="form-control" #nameBox="ngModel" [(ngModel)]="product.name" name="name" id="name" type="text"
-          minlength="3" required>
-        <div class="alert alert-danger" *ngIf="!product._id &&nameBox.touched && nameBox.errors?.['required']"> name is
-          required</div>
-        <div class="alert alert-danger" *ngIf="!product._id && nameBox.touched && nameBox.errors?.['minlength']">Name
-          too short</div>
+        <input
+          class="form-control"
+          #nameBox="ngModel"
+          [(ngModel)]="product.name"
+          name="name"
+          id="name"
+          type="text"
+          minlength="3"
+          required
+        />
+        <div
+          class="alert alert-danger"
+          *ngIf="!product._id &&nameBox.touched && nameBox.errors?.['required']"
+        >
+          name is required
+        </div>
+        <div
+          class="alert alert-danger"
+          *ngIf="!product._id && nameBox.touched && nameBox.errors?.['minlength']"
+        >
+          Name too short
+        </div>
         <div class="form-group">
           <label for="price">Price</label>
-          <div class="input-group-prepend"><span class="input-group-text">$</span>
-            <input type="number" name="price" step=".5" [(ngModel)]="product.price" required min="0" max="1000"
-              class="form-control" #priceBox="ngModel" />
+          <div class="input-group-prepend">
+            <span class="input-group-text">$</span>
+            <input
+              type="number"
+              name="price"
+              step=".5"
+              [(ngModel)]="product.price"
+              required
+              min="0"
+              max="1000"
+              class="form-control"
+              #priceBox="ngModel"
+            />
           </div>
-          <div class="alert alert-danger" *ngIf="priceBox.touched && priceBox.errors?.['required']"> Missing Price</div>
-          <div class="alert alert-danger" *ngIf="priceBox.touched && priceBox.errors?.['min']">Price can not be below
-            0</div>
-          <div class="alert alert-danger" *ngIf="priceBox.touched && priceBox.errors?.['max']">Price not be over
-            1000</div>
+          <div
+            class="alert alert-danger"
+            *ngIf="priceBox.touched && priceBox.errors?.['required']"
+          >
+            Missing Price
+          </div>
+          <div
+            class="alert alert-danger"
+            *ngIf="priceBox.touched && priceBox.errors?.['min']"
+          >
+            Price can not be below 0
+          </div>
+          <div
+            class="alert alert-danger"
+            *ngIf="priceBox.touched && priceBox.errors?.['max']"
+          >
+            Price not be over 1000
+          </div>
         </div>
         <div class="form-group">
           <label for="category">Category</label>
-          <select class="form-control" name="categoryId" [(ngModel)]="product.categoryId" required
-            #categoryBox="ngModel">
+          <select
+            class="form-control"
+            name="categoryId"
+            [(ngModel)]="product.categoryId"
+            required
+            #categoryBox="ngModel"
+          >
             <option disabled selected>Select...</option>
-            <option *ngFor="let c of this.categories" [value]="c._id">{{c.name}}</option>
+            <option *ngFor="let c of this.categories" [value]="c._id">
+              {{ c.name }}
+            </option>
           </select>
-          <div class="alert alert-danger" *ngIf=" categoryBox.touched && categoryBox.errors?.['required']"> Missing
-            category</div>
+          <div
+            class="alert alert-danger"
+            *ngIf=" categoryBox.touched && categoryBox.errors?.['required']"
+          >
+            Missing category
+          </div>
         </div>
         <div class="form-group">
           <label for="image">Add pic </label>
-          <input class="form-control-file" accept="image/*" (change)="onImageUpload($event)" type="file" name="image"
-            #imageBox />
-        </div>
-        <div>
-          <div> <button *ngIf="!product._id" class="btn btn-primary" [disabled]="formInfo.invalid">Save</button></div>
+          <input
+            class="form-control-file"
+            accept="image/*"
+            (change)="onImageUpload($event)"
+            type="file"
+            name="image"
+            #imageBox
+          />
         </div>
         <div>
           <div>
-            <button *ngIf="product._id" class="btn btn-primary col-md-3 mr-2">Update</button>
-            <button type="button" *ngIf="product._id" class="btn btn-danger col-md-3"
-              (click)="deleteProduct()">Delete</button>
+            <button
+              *ngIf="!product._id"
+              class="btn btn-primary"
+              [disabled]="formInfo.invalid"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+        <div>
+          <div>
+            <button *ngIf="product._id" class="btn btn-primary col-md-3 mr-2">
+              Update
+            </button>
+            <button
+              type="button"
+              *ngIf="product._id"
+              class="btn btn-danger col-md-3"
+              (click)="deleteProduct()"
+            >
+              Delete
+            </button>
           </div>
         </div>
       </div>
     </form>
   </div>
   <div class="col-md-6">
-    <div class="card" style="width: 18rem;">
-      <img *ngIf="!product._id" [src]="imageDisplay" class="card-img-top">
-      <ng-container> <img *ngIf="product._id" [src]="imageDisplay" class="card-img-top"></ng-container>
+    <div class="card" style="width: 18rem">
+      <img *ngIf="!product._id" [src]="imageDisplay" class="card-img-top" />
+      <ng-container>
+        <img *ngIf="product._id" [src]="imageDisplay" class="card-img-top"
+      /></ng-container>
       <div class="card-body">
-        <h5 class="card-title">{{product.name}}</h5>
-        <p class="card-text">{{product.price | currency:"USD"}}</p>
-        <p class="card-text" *ngIf="product._id">{{product.categoryId.name}}</p>
+        <h5 class="card-title">{{ product.name }}</h5>
+        <p class="card-text">{{ product.price | currency: "USD" }}</p>
+        <p class="card-text" *ngIf="product._id">
+          {{ product.categoryId.name }}
+        </p>
       </div>
     </div>
   </div>

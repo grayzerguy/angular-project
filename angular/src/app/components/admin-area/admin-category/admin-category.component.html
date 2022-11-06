@@ -1,9 +1,21 @@
-<form (ngSubmit)="add()">
-    <div class="form-group">
-    <label for="name">name</label>
-    <input class="form-control" [(ngModel)]="category.name"  name="name" id="name" type="text">
-    <button class="btn btn-primary"
-    >Add</button>
-    </div>
- </form> 
+<div>
+  <a routerLink="/admin/category/new" class="btn btn-primary">New Category</a>
+</div>
 
+<div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of categories">
+        <td>{{ c.name }}</td>
+        <td>
+          <a [routerLink]="['/admin/category', c._id]">Edit</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

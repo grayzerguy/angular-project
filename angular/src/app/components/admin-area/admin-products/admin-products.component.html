@@ -1,12 +1,15 @@
 <div>
   <p>
     <a routerLink="/admin/products/new" class="btn btn-primary">New Product</a>
-    <a routerLink="/admin/category/new" class="btn btn-primary">New Category</a>
-
- 
   </p>
   <p>
-    <input #query (keyup)="filter(query.value)" type="text" class="form-control col-md-4" placeholder="Search..">
+    <input
+      #query
+      (keyup)="filter(query.value)"
+      type="text"
+      class="form-control col-md-4"
+      placeholder="Search.."
+    />
   </p>
 </div>
 
@@ -22,18 +25,14 @@
   <tbody>
     <ng-container *ngIf="products"></ng-container>
     <tr *ngFor="let p of products">
-      <td>{{p.name}}</td>
-      <td>{{p.price | currency:"USD"}}</td>
-      <ng-container > <img [src]="p.image" class="card-img-top" style="width: 5rem;"
-          ></ng-container>
+      <td>{{ p.name }}</td>
+      <td>{{ p.price | currency: "USD" }}</td>
+      <ng-container>
+        <img [src]="p.image" class="card-img-top" style="width: 5rem"
+      /></ng-container>
       <td>
         <a [routerLink]="['/admin/products/', p._id]">Edit</a>
-
       </td>
     </tr>
   </tbody>
 </table>
-
-
-
-

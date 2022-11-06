@@ -7,24 +7,16 @@ import { ProductModel } from 'src/app/models/products-model';
 @Component({
   selector: 'app-admin-orders',
   templateUrl: './admin-orders.component.html',
-  styleUrls: ['./admin-orders.component.css']
+  styleUrls: ['./admin-orders.component.css'],
 })
 export class AdminOrdersComponent implements OnInit {
+  public orders: OrderModel[] = [];
 
-  public orders: OrderModel[] = []
-
-
-  constructor(private ordersService: OrdersService
-  ) { }
+  constructor(private ordersService: OrdersService) {}
 
   async ngOnInit() {
     try {
-  
       this.orders = await this.ordersService.getAllOrders();
-
-    }
-    catch (err: any) {
-
-    }
+    } catch (err: any) {}
   }
 }

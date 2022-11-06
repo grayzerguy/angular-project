@@ -1,5 +1,5 @@
-import { OrderItemModel } from "./order-Item.maodel";
-import { UserModel } from "./user.model";
+import { OrderItemModel } from './order-Item.maodel';
+import { UserModel } from './user.model';
 
 export class OrderModel {
   public _id?: string;
@@ -11,5 +11,4 @@ export class OrderModel {
   public dateOrdered?: Date;
   public dateShipped?: Date;
   public lastFourDigits?: number;
-
 }

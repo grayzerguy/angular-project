@@ -8,9 +8,7 @@ import { LoginComponent } from './components/auth-area/login/login.component';
 import { Page404Component } from './components/layout-area/page404/page404.component';
 import { StoreHomeComponent } from './components/store-area/store-home/store-home.component';
 
-
 // import { ProductDetailsComponent } from './components/products-area/product-details/product-details.component';
-
 
 import { LogoutComponent } from './components/auth-area/logout/logout.component';
 import { AuthGuard } from './services/auth.guard';
@@ -21,35 +19,69 @@ import { OrderSuccessComponent } from './components/shopping-area/order-success/
 import { AdminProductsComponent } from './components/admin-area/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './components/admin-area/admin-orders/admin-orders.component';
 import { MyOrdersComponent } from './components/shopping-area/my-orders/my-orders.component';
-
-
+import { CategoryFormComponent } from './components/admin-area/category-form/category-form.component';
 
 const routes: Routes = [
-  { path: "", component: LoginComponent },
-  { path: "login", component: LoginComponent },
-  { path: "register", component: RegisterComponent },
-  { path: "logout", component: LogoutComponent },
+  { path: '', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'logout', component: LogoutComponent },
 
+  {
+    path: 'admin/products/new',
+    component: ProductFormComponent,
+    canActivate: [AuthGuard, AdminGuard],
+  },
+  {
+    path: 'admin/category/:id',
+    component: CategoryFormComponent,
+    canActivate: [AuthGuard, AdminGuard],
+  },
+  {
+    path: 'admin/category',
+    component: AdminCategoryComponent,
+    canActivate: [AuthGuard, AdminGuard],
+  },
+  {
+    path: 'admin/category/new',
+    component: CategoryFormComponent,
+    canActivate: [AuthGuard, AdminGuard],
+  },
+  {
+    path: 'admin/products/:id',
+    component: ProductFormComponent,
+    canActivate: [AuthGuard, AdminGuard],
+  },
+  {
+    path: 'admin/products',
+    component: AdminProductsComponent,
+    canActivate: [AuthGuard, AdminGuard],
+  },
+  {
+    path: 'admin/orders',
+    component: AdminOrdersComponent,
+    canActivate: [AuthGuard, AdminGuard],
+  },
 
-  { path: "admin/products/new", component: ProductFormComponent, canActivate: [AuthGuard, AdminGuard] },
-  { path: "admin/category/new", component: AdminCategoryComponent, canActivate: [AuthGuard, AdminGuard] },
-  { path: "admin/products/:id", component: ProductFormComponent, canActivate: [AuthGuard, AdminGuard] },
-  { path: "admin/products", component: AdminProductsComponent, canActivate: [AuthGuard, AdminGuard] },
-  { path: "admin/orders", component: AdminOrdersComponent, canActivate: [AuthGuard, AdminGuard] },
-
-
-  { path: "shopping-cart", component: ShoppingCartComponent, canActivate: [AuthGuard] },
-  { path: "checkout", component: CheckOutComponent, canActivate: [AuthGuard] },
-  { path: "order-success", component: OrderSuccessComponent, canActivate: [AuthGuard] },
-  { path: "my/orders", component: MyOrdersComponent, canActivate: [AuthGuard] },
-// the main page
-  { path: "store", component: StoreHomeComponent,canActivate: [AuthGuard]},
-  { path: "**", component: Page404Component },
-
+  {
+    path: 'shopping-cart',
+    component: ShoppingCartComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'checkout', component: CheckOutComponent, canActivate: [AuthGuard] },
+  {
+    path: 'order-success',
+    component: OrderSuccessComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuard] },
+  // the main page
+  { path: 'store', component: StoreHomeComponent, canActivate: [AuthGuard] },
+  { path: '**', component: Page404Component },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
